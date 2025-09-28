@@ -19,75 +19,101 @@ document.querySelectorAll('.dropdown-menu [data-bs-toggle="dropdown"]').forEach(
 
 /*funcionalidades del carrito de compras*/
 
-// Array de productos del carrito
-    let carrito = [
-      { id: 1, nombre: "Juego ollas y sartenes de acero inoxidable super resistentes", precio: 99800, cantidad: 1, imagen: "https://mayoristaprecioscuidados.com.ar/Admin/Imagenes/Items/395780.jpg" },
-      { id: 2, nombre: "Tender ropa de 18 mm", precio: 34000, cantidad: 1, imagen: "https://mayoristaprecioscuidados.com.ar/Admin/Imagenes/Items/395780.jpg" },
-      { id: 3, nombre: "Vaso térmico Labu", precio: 1400, cantidad: 8, imagen: "https://mayoristaprecioscuidados.com.ar/Admin/Imagenes/Items/395780.jpg" },
-      { id: 4, nombre: "Juego ollas y sartenes de acero inoxidable super resistentes", precio: 99800, cantidad: 1, imagen: "https://mayoristaprecioscuidados.com.ar/Admin/Imagenes/Items/395780.jpg" },
-      { id: 5, nombre: "Tender ropa de 18 mm", precio: 34000, cantidad: 1, imagen: "https://mayoristaprecioscuidados.com.ar/Admin/Imagenes/Items/395780.jpg" },
-      { id: 6, nombre: "Vaso térmico Labu", precio: 1400, cantidad: 8, imagen: "https://mayoristaprecioscuidados.com.ar/Admin/Imagenes/Items/395780.jpg" }
-    ];
+// Función para obtener el url de la imagen de un producto
+  function getImageUrl(productId) {
+    return `http://localhost:8080/images/productos/${productId}.jpg`;
+  }
 
-    function renderCarrito() {
-      const cartItems = document.getElementById("cartItems");
-      const cartTotal = document.getElementById("cartTotal");
-      cartItems.innerHTML = "";
-      let total = 0;
+// Funciones para manejar localStorage
+function getCarrito() {
+  return JSON.parse(localStorage.getItem("carrito")) || [];
+}
 
-      carrito.forEach(producto => {
-        let subtotal = producto.precio * producto.cantidad;
-        total += subtotal;
+function saveCarrito(carrito) {
+  localStorage.setItem("carrito", JSON.stringify(carrito));
+}
 
-        let item = document.createElement("div");
-        item.classList.add("cart-item");
-        item.classList.add("shadow");
+// Renderizar carrito
+function renderCarrito() {
+  const cartItems = document.getElementById("cartItems");
+  const cartTotal = document.getElementById("cartTotal");
+  let carrito = getCarrito();
 
-        item.innerHTML = `
-          <div class="d-flex align-items-center">
-            <img src="${producto.imagen}" class="product-img me-2">
-            <span class="text-truncate product-name">${producto.nombre}</span>
-          </div>
-          <div class="d-flex align-items-center product-actions">
-            <div class="input-group input-group-sm me-1">
-              <button class="btn" onclick="cambiarCantidad(${producto.id}, -1)">-</button>
-              <input type="text" class="form-control text-center cantidadProducto" value="${producto.cantidad}" readonly>
-              <button class="btn" onclick="cambiarCantidad(${producto.id}, 1)">+</button>
-            </div>
-            <span class="text-danger fw-bold me-2">Total: S/.${subtotal.toLocaleString()}</span>
-            <button class="btn btn-remove ms-5" onclick="eliminarProducto(${producto.id})">✕</button>
-          </div>
-        `;
-        cartItems.appendChild(item);
-      });
+  cartItems.innerHTML = "";
+  let total = 0;
 
-      cartTotal.textContent = "S/." + total.toLocaleString();
-    }
+  carrito.forEach(producto => {
+    let subtotal = producto.precio * producto.cantidad;
+    total += subtotal;
 
-    function cambiarCantidad(id, delta) {
-      let producto = carrito.find(p => p.id === id);
-      if (!producto) return;
-      producto.cantidad += delta;
-      if (producto.cantidad < 1) producto.cantidad = 1;
+    let item = document.createElement("div");
+    item.classList.add("cart-item", "shadow");
+
+    item.innerHTML = `
+      <div class="d-flex align-items-center">
+        <img src="${getImageUrl(producto.id)}" alt="${producto.nombre}" class="product-img me-2" 
+        onerror="this.onerror=null; this.src='http://localhost:8080/images/default.jpg';">
+        <span class="text-truncate product-name">${producto.nombre}</span>
+      </div>
+      <div class="d-flex align-items-center product-actions">
+        <div class="input-group input-group-sm me-1">
+          <button class="btn" onclick="cambiarCantidad(${producto.id}, -1)">-</button>
+          <input type="text" class="form-control text-center cantidadProducto" value="${producto.cantidad}" readonly>
+          <button class="btn" onclick="cambiarCantidad(${producto.id}, 1)">+</button>
+        </div>
+        <span class="text-danger fw-bold me-2">Total: S/.${subtotal.toLocaleString()}</span>
+        <button class="btn btn-remove ms-5" onclick="eliminarProducto(${producto.id})">✕</button>
+      </div>
+    `;
+    cartItems.appendChild(item);
+  });
+
+  cartTotal.textContent = "S/." + total.toLocaleString();
+}
+
+
+function cambiarCantidad(id, delta) {
+  let carrito = getCarrito();
+  let producto = carrito.find(p => p.id === id);
+  if (!producto) return;
+
+  producto.cantidad += delta;
+  if (producto.cantidad < 1) producto.cantidad = 1;
+
+  saveCarrito(carrito);
+  renderCarrito();
+}
+
+
+function eliminarProducto(id) {
+  let carrito = getCarrito().filter(p => p.id !== id);
+  saveCarrito(carrito);
+  renderCarrito();
+}
+
+
+function vaciarCarrito() {
+  saveCarrito([]);
+  renderCarrito();
+}
+
+
+function finalizarPedido() {
+  window.location.href = "finalizarPedido.html";
+}
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  renderCarrito();
+});
+
+//cargar productos al presionar el botón del carrito
+const botonesCarrito = document.querySelectorAll('[data-bs-target="#cartModal"]');
+Array.from(botonesCarrito).forEach(function(boton) {
+  boton.addEventListener('click', function() {
       renderCarrito();
-    }
-
-    function eliminarProducto(id) {
-      carrito = carrito.filter(p => p.id !== id);
-      renderCarrito();
-    }
-
-    function vaciarCarrito() {
-      carrito = [];
-      renderCarrito();
-    }
-
-    function finalizarPedido() {
-      window.location.href = "finalizarPedido.html";
-    }
-
-    // Render inicial
-    renderCarrito();
+  });
+});
 
 /*Fin del carrito de compras */ 
 

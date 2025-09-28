@@ -1,5 +1,4 @@
 
-/*Componente reutilizables*/
 .background-rojo{
   background: rgb(228, 30, 30) !important;
 }
@@ -8,7 +7,6 @@
   background: rgb(228, 30, 30) !important;
 }
 
-/* Sombra sutil debajo del banner rojo (titulo de cada página) */
 .shadow-banner {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.65);
 }

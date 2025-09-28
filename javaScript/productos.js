@@ -28,6 +28,36 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+//funciones para guardar los productos agregados al carrito en el localStorage
+function getCarrito() {
+  return JSON.parse(localStorage.getItem("carrito")) || [];
+}
+
+function saveCarrito(carrito) {
+  localStorage.setItem("carrito", JSON.stringify(carrito));
+}
+
+
+function agregarAlCarrito(producto, cantidad = 1) {
+  let carrito = getCarrito();
+
+  // Verificar si ya existe en el carrito
+  let existente = carrito.find(p => p.id === producto.id);
+
+  if (existente) {
+    existente.cantidad += cantidad;
+  } else {
+    carrito.push({
+      id: producto.id,
+      nombre: producto.nombre,
+      precio: producto.precio,
+      cantidad: cantidad
+    });
+  }
+
+  saveCarrito(carrito);
+}
+
 
 //cargando productos desde la base de datos
 document.addEventListener("DOMContentLoaded", () => {
@@ -93,9 +123,19 @@ document.addEventListener("DOMContentLoaded", () => {
             <input type="number" class="form-control mx-1" value="1" min="1">
             <button class="btn btn-outline-danger btn-sm backgroundHover-rojo" onclick="updateQty(this, 1)">+</button>
           </div>
-          <button class="btn btn-outline-danger w-100 backgroundHover-rojo">Agregar al Carrito</button>
+          <button class="btn btn-outline-danger w-100 backgroundHover-rojo btn-add-carrito">Agregar al Carrito</button>
         </div>
       `;
+
+      // evento para el botón "Agregar al carrito"
+      const btn = col.querySelector(".btn-add-carrito");
+      const inputQty = col.querySelector("input");
+
+      btn.addEventListener("click", () => {
+        const cantidad = parseInt(inputQty.value) || 1;
+        agregarAlCarrito(p, cantidad);
+        inputQty.value=1;
+      });
 
       container.appendChild(col);
     });

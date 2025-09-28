@@ -1,14 +1,21 @@
 /*funcionalidades de la lista de productos del pedido*/
 
+// Función para obtener el url de la imagen de un producto
+  function getImageUrl(productId) {
+    return `http://localhost:8080/images/productos/${productId}.jpg`;
+  }
+
+// Funciones para manejar datos en el localStorage
+function getProductosPedido() {
+  return JSON.parse(localStorage.getItem("carrito")) || [];
+}
+
+function saveProductosPedido(carrito) {
+  localStorage.setItem("carrito", JSON.stringify(carrito));
+}
+
 // Array de productos del pedido
-    let pedido = [
-      { id: 1, nombre: "Juego ollas y sartenes de acero inoxidable super resistentes", precio: 99800, cantidad: 1, imagen: "https://mayoristaprecioscuidados.com.ar/Admin/Imagenes/Items/395780.jpg" },
-      { id: 2, nombre: "Tender ropa de 18 mm", precio: 34000, cantidad: 1, imagen: "https://mayoristaprecioscuidados.com.ar/Admin/Imagenes/Items/395780.jpg" },
-      { id: 3, nombre: "Vaso térmico Labu", precio: 1400, cantidad: 8, imagen: "https://mayoristaprecioscuidados.com.ar/Admin/Imagenes/Items/395780.jpg" },
-      { id: 4, nombre: "Juego ollas y sartenes de acero inoxidable super resistentes", precio: 99800, cantidad: 1, imagen: "https://mayoristaprecioscuidados.com.ar/Admin/Imagenes/Items/395780.jpg" },
-      { id: 5, nombre: "Tender ropa de 18 mm", precio: 34000, cantidad: 1, imagen: "https://mayoristaprecioscuidados.com.ar/Admin/Imagenes/Items/395780.jpg" },
-      { id: 6, nombre: "Vaso térmico Labu", precio: 1400, cantidad: 8, imagen: "https://mayoristaprecioscuidados.com.ar/Admin/Imagenes/Items/395780.jpg" }
-    ];
+    let pedido = getProductosPedido();
 
     function renderProductosPedido() {
       const pedidoItems = document.getElementById("pedidoItems");
@@ -16,9 +23,11 @@
       const descuentoPedido = document.getElementById("descuentoPedido");
       const totalPedidoNeto = document.getElementById("TotalPedidoNeto"); 
 
+      let pedido = getProductosPedido();
+
       pedidoItems.innerHTML = "";
       let TotalPedido = 0;
-      let descuento = 10000; //se aplicará lógica de negocio para el descuento posteriormente
+      let descuento = 0; //se aplicará lógica de negocio para el descuento posteriormente
       let totalNeto = 0;
 
       pedido.forEach(producto => {
@@ -32,7 +41,8 @@
 
         itemPedido.innerHTML = `
             <div class="d-flex align-items-center">
-                <img src="${producto.imagen}" class="product-img-pedidoFinal me-2 ms-3">
+                <img src="${getImageUrl(producto.id)}" alt="${producto.nombre}" class="product-img-pedidoFinal me-2 ms-3" 
+                onerror="this.onerror=null; this.src='http://localhost:8080/images/default.jpg';">
                 <span class="text-truncate product-name ms-4">${producto.nombre}</span>
             </div>
             <div class="d-flex align-items-center product-actions me-4">
@@ -55,15 +65,18 @@
     }
 
     function cambiarCantidadPedido(id, delta) {
+      let pedido = getProductosPedido();
       let productoPedido = pedido.find(p => p.id === id);
       if (!productoPedido) return;
       productoPedido.cantidad += delta;
       if (productoPedido.cantidad < 1) productoPedido.cantidad = 1;
+      saveProductosPedido(pedido);
       renderProductosPedido();
     }
 
     function eliminarProductoPedido(id) {
-      pedido = pedido.filter(p => p.id !== id);
+      let pedido = getProductosPedido().filter(p => p.id !== id);
+      saveProductosPedido(pedido);
       renderProductosPedido();
     }
     // Render inicial

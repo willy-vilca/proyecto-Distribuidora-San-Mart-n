@@ -106,77 +106,95 @@
         <span class="fw-bold">SUCURSALES</span>
     </div>
   <!--  CONTENIDO SUCURSALES -->
-  <main class="container my-4">
+<main class="container my-4">
 
-    <!-- Pestañas -->
-    <ul class="nav nav-tabs mt-4" id="sucursalTabs" role="tablist">
-      <li class="nav-item">
-        <button class="nav-link active" id="sede-central-tab" data-bs-toggle="tab" data-bs-target="#sede-central" type="button" role="tab">Sede Central</button>
-      </li>
-      <li class="nav-item">
-        <button class="nav-link" id="sucursal1-tab" data-bs-toggle="tab" data-bs-target="#sucursal1" type="button" role="tab">Sucursal 1</button>
-      </li>
-      <li class="nav-item">
-        <button class="nav-link" id="sucursal2-tab" data-bs-toggle="tab" data-bs-target="#sucursal2" type="button" role="tab">Sucursal 2</button>
-      </li>
-    </ul>
+  <!-- Pestañas -->
+  <ul class="nav nav-tabs mt-4" id="sucursalTabs" role="tablist">
+    <li class="nav-item">
+      <button class="nav-link active" id="sede-central-tab" data-bs-toggle="tab" data-bs-target="#sede-central" type="button" role="tab">Sede Central</button>
+    </li>
+    <li class="nav-item">
+      <button class="nav-link" id="sucursal1-tab" data-bs-toggle="tab" data-bs-target="#sucursal1" type="button" role="tab">Sucursal 1</button>
+    </li>
+    <li class="nav-item">
+      <button class="nav-link" id="sucursal2-tab" data-bs-toggle="tab" data-bs-target="#sucursal2" type="button" role="tab">Sucursal 2</button>
+    </li>
+  </ul>
 
-    <!-- Contenido de pestañas -->
-    <div class="tab-content" id="sucursalTabsContent">
-      <!-- Sede Central -->
-      <div class="tab-pane fade show active" id="sede-central" role="tabpanel">
-        <div class="row mt-3">
-          <div class="col-md-6">
-            <h4>Sede Central</h4>
-            <p><i class="bi bi-geo-alt-fill"></i> Av. Mariscal 1565 – Pueblo Nuevo – Ica, Perú</p>
-            <p><i class="bi bi-telephone-fill"></i> 956 654 325</p>
-            <h5>Horarios</h5>
-            <p>Lunes a Viernes: 08:00 – 18:00 <br>Sábados: 08:00 – 13:00</p>
-            <h5>Envíos</h5>
-            <p><i class="bi bi-truck"></i> Disponible vía transporte</p>
-          </div>
-          <div class="col-md-6">
-            <div class="mapa">
-              <!-- Google Maps -->
-              <iframe src="https://www.google.com/maps/embed?pb=!1m18..." width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-            </div>
-          </div>
+  <!-- Contenido de pestañas -->
+  <div class="tab-content" id="sucursalTabsContent">
+
+    <!-- Sede Central -->
+    <div class="tab-pane fade show active" id="sede-central" role="tabpanel">
+      <div class="row mt-4 align-items-center">
+        <div class="col-md-6">
+          <img src="img/sucursales/sede.jpg.png" alt="Sede Central" class="img-fluid rounded shadow">
+        </div>
+        <div class="col-md-6 text-start">
+          <h4 class="fw-bold">Sede Central</h4>
+          <p><i class="bi bi-geo-alt-fill text-danger"></i> Av. Mariscal 1565 – Pueblo Nuevo – Ica, Perú</p>
+          <p><i class="bi bi-telephone-fill text-danger"></i> 956 654 325</p>
+          <h5 class="fw-bold mt-3">Horarios</h5>
+          <p>Lunes a Viernes: 08:00 – 18:00 <br>Sábados: 08:00 – 13:00</p>
+          <h5 class="fw-bold mt-3">Envíos</h5>
+          <p><i class="bi bi-truck text-danger"></i> Disponible vía transporte</p>
         </div>
       </div>
-
-      <!-- Sucursal 1 -->
-      <div class="tab-pane fade" id="sucursal1" role="tabpanel">
-        <div class="row mt-3">
-          <div class="col-md-6">
-            <h4>Sucursal 1</h4>
-            <p><i class="bi bi-geo-alt-fill"></i> Dirección sucursal 1</p>
-            <p><i class="bi bi-telephone-fill"></i> Teléfono sucursal 1</p>
-            <h5>Horarios</h5>
-            <p>08:00 – 18:00</p>
-          </div>
-          <div class="col-md-6">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18..." width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-          </div>
-        </div>
-      </div>
-
-      <!-- Sucursal 2 -->
-      <div class="tab-pane fade" id="sucursal2" role="tabpanel">
-        <div class="row mt-3">
-          <div class="col-md-6">
-            <h4>Sucursal 2</h4>
-            <p><i class="bi bi-geo-alt-fill"></i> Dirección sucursal 2</p>
-            <p><i class="bi bi-telephone-fill"></i> Teléfono sucursal 2</p>
-            <h5>Horarios</h5>
-            <p>08:00 – 18:00</p>
-          </div>
-          <div class="col-md-6">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18..." width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-          </div>
+      <div class="row mt-4">
+        <div class="col-12">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18..." width="100%" height="300" style="border:0;" allowfullscreen loading="lazy"></iframe>
         </div>
       </div>
     </div>
-  </main>
+
+    <!-- Sucursal 1 -->
+    <div class="tab-pane fade" id="sucursal1" role="tabpanel">
+      <div class="row mt-4 align-items-center">
+        <div class="col-md-6">
+          <img src="img/sucursales/sucur1.jpg.png" alt="Sucursal 1" class="img-fluid rounded shadow">
+        </div>
+        <div class="col-md-6 text-start">
+          <h4 class="fw-bold">Sucursal 1</h4>
+          <p><i class="bi bi-geo-alt-fill text-danger"></i> Dirección sucursal 1</p>
+          <p><i class="bi bi-telephone-fill text-danger"></i> Teléfono sucursal 1</p>
+          <h5 class="fw-bold mt-3">Horarios</h5>
+          <p>Lunes a Viernes: 08:00 – 18:00</p>
+          <h5 class="fw-bold mt-3">Envíos</h5>
+          <p><i class="bi bi-truck text-danger"></i> Disponible vía transporte</p>
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-12">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18..." width="100%" height="300" style="border:0;" allowfullscreen loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sucursal 2 -->
+    <div class="tab-pane fade" id="sucursal2" role="tabpanel">
+      <div class="row mt-4 align-items-center">
+        <div class="col-md-6">
+          <img src="img/sucursales/sucur2.jpg.png" alt="Sucursal 2" class="img-fluid rounded shadow">
+        </div>
+        <div class="col-md-6 text-start">
+          <h4 class="fw-bold">Sucursal 2</h4>
+          <p><i class="bi bi-geo-alt-fill text-danger"></i> Dirección sucursal 2</p>
+          <p><i class="bi bi-telephone-fill text-danger"></i> Teléfono sucursal 2</p>
+          <h5 class="fw-bold mt-3">Horarios</h5>
+          <p>Lunes a Viernes: 08:00 – 18:00</p>
+          <h5 class="fw-bold mt-3">Envíos</h5>
+          <p><i class="bi bi-truck text-danger"></i> Disponible vía transporte</p>
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-12">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18..." width="100%" height="300" style="border:0;" allowfullscreen loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
 
   <!-- Footer -->
     <footer>

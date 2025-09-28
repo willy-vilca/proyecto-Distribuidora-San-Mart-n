@@ -102,9 +102,6 @@
     </header>
     <!--Final del header-->
 
-
- 
-
   <!-- DETALLE DEL PRODUCTO -->
   <div class="container my-5">
     <div class="row">
@@ -113,142 +110,23 @@
       </div>
     </div>
 
-    <div class="row mt-4" id="product-detail">
+    <div class="row mt-4 mb-5" id="product-detail">
       <!-- Aquí se cargará el producto dinámicamente -->
     </div>
   </div>
 
   <!-- Productos relacionados -->
-   <div class="container-fluid text-center background-rojo text-white fs-2 py-4 mt-5">
-  <span class="fw-bold">PRODUCTOS RELACIONADOS</span>
-</div>
-
-<div class="container my-5">
-  <div class="row g-4 mt-2">
-
-    <!-- Tarjeta 1 -->
-    <div class="col-12 col-md-6 col-lg-3">
-      <div class="product-card">
-        <a href="producto-info.html?id=1">
-          <img src="https://mayoristaprecioscuidados.com.ar/Admin/Imagenes/Items/395780.jpg" alt="Producto 1">
-        </a>
-        <h6 class="mt-2 fw-bold text-danger fs-5">MODER-4007/00</h6>
-        <p class="fs-5">Sartén antiadherente 28cm</p>
-        <div class="product-price">S/.217.00</div>
-        <button class="btn btn-outline-danger w-100 backgroundHover-rojo">Agregar al Carrito</button>
-      </div>
-    </div>
-
-    <!-- Tarjeta 2 -->
-    <div class="col-12 col-md-6 col-lg-3">
-      <div class="product-card">
-        <a href="producto-info.html?id=2">
-          <img src="https://mayoristaprecioscuidados.com.ar/Admin/Imagenes/Items/4480.jpg" alt="Producto 2">
-        </a>
-        <h6 class="mt-2 fw-bold text-danger fs-5">LAB-117-26003</h6>
-        <p class="fs-5">Cacerola de Acero N°28</p>
-        <div class="product-price">S/.120.00</div>
-        <button class="btn btn-outline-danger w-100 backgroundHover-rojo">Agregar al Carrito</button>
-      </div>
-    </div>
-
-    <!-- Tarjeta 3 -->
-    <div class="col-12 col-md-6 col-lg-3">
-      <div class="product-card">
-        <a href="producto-info.html?id=3">
-          <img src="https://mayoristaprecioscuidados.com.ar/Admin/Imagenes/Items/395630.jpg" alt="Producto 3">
-        </a>
-        <h6 class="mt-2 fw-bold text-danger fs-5">CL-6280</h6>
-        <p class="fs-5">Panquequera-Mango de Madera 22cm</p>
-        <div class="product-price">S/.150.00</div>
-        <button class="btn btn-outline-danger w-100 backgroundHover-rojo">Agregar al Carrito</button>
-      </div>
-    </div>
-
-    <!-- Tarjeta 4 -->
-    <div class="col-12 col-md-6 col-lg-3">
-      <div class="product-card">
-        <a href="producto-info.html?id=4">
-          <img src="https://m.media-amazon.com/images/I/81dnHMrSnXL.jpg" alt="Producto 4">
-        </a>
-        <h6 class="mt-2 fw-bold text-danger fs-5">CL-7582</h6>
-        <p class="fs-5">Sartén de Mármol 26cm</p>
-        <div class="product-price">S/.230.00</div>
-        <button class="btn btn-outline-danger w-100 backgroundHover-rojo">Agregar al Carrito</button>
-      </div>
-    </div>
-
+  <div class="container-fluid text-center background-rojo text-white fs-2 py-4 mt-5">
+    <span class="fw-bold">PRODUCTOS RELACIONADOS</span>
   </div>
-</div>
+
+  <div class="container my-5" id="seccion-productos">
+    <div class="row g-4 mt-2">
+      <!--Los productos relacionados se cargan desde la BD-->
+    </div>    
+  </div>
  
-
-  <!-- SCRIPT DE PRODUCTOS -->
-  <script>
-    const productos = {
-      1: {
-        nombre: "MODER-4007/00",
-        descripcion: "Sartén antiadherente de 28cm, resistente, fácil de limpiar y con mango ergonómico.",
-        precio: "S/.217.00",
-        marca: "MODER",
-        presentacion: "Unidad",
-        imagen: "https://mayoristaprecioscuidados.com.ar/Admin/Imagenes/Items/395780.jpg"
-      },
-      2: {
-        nombre: "LAB-117-26003",
-        descripcion: "Cacerola de acero inoxidable N°28, ideal para preparaciones grandes, resistente y duradera.",
-        precio: "S/.120.00",
-        marca: "LAB",
-        presentacion: "Unidad",
-        imagen: "https://mayoristaprecioscuidados.com.ar/Admin/Imagenes/Items/4480.jpg"
-      },
-      3: {
-        nombre: "CL-6280",
-        descripcion: "Panquequera de 22cm con mango de madera, perfecta para panqueques y crepas.",
-        precio: "S/.150.00",
-        marca: "CL",
-        presentacion: "Unidad",
-        imagen: "https://mayoristaprecioscuidados.com.ar/Admin/Imagenes/Items/395630.jpg"
-      },
-      4: {
-        nombre: "CL-7582",
-        descripcion: "Sartén de mármol de 26cm, recubrimiento antiadherente premium, cocina uniforme.",
-        precio: "S/.230.00",
-        marca: "CL",
-        presentacion: "Unidad",
-        imagen: "https://m.media-amazon.com/images/I/81dnHMrSnXL.jpg"
-      }
-    };
-
-    const params = new URLSearchParams(window.location.search);
-    const id = params.get("id");
-    const producto = productos[id];
-
-    if (producto) {
-      document.getElementById("product-detail").innerHTML = `
-        <div class="col-md-6">
-          <img src="${producto.imagen}" alt="${producto.nombre}" class="img-fluid rounded shadow">
-        </div>
-        <div class="col-md-6">
-          <h3 class="fw-bold text-danger">${producto.nombre}</h3>
-          <p>${producto.descripcion}</p>
-          <ul>
-            <li><strong>Marca:</strong> ${producto.marca}</li>
-            <li><strong>Presentación:</strong> ${producto.presentacion}</li>
-            <li><strong>Precio:</strong> ${producto.precio}</li>
-          </ul>
-          <button class="btn btn-outline-danger w-100 backgroundHover-rojo mt-3">Agregar al Carrito</button>
-        </div>
-      `;
-    } else {
-      document.getElementById("product-detail").innerHTML = `<p class="text-center">Producto no encontrado.</p>`;
-    }
-  </script>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
-
- <!-- Footer -->
+<!-- Footer -->
     <footer>
         <div class="background-rojo text-white py-3 footer-red-section">
             <div class="container">
@@ -338,8 +216,70 @@
         </a>
     </div>
 
-    <script src="javaScript/funcionalidades.js"></script>
-    <script src="javaScript/cargarCategorias.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  <!-- SCRIPT DE PRODUCTOS -->
+  <script>
+    const productos = {
+      1: {
+        nombre: "MODER-4007/00",
+        descripcion: "Sartén antiadherente de 28cm, resistente, fácil de limpiar y con mango ergonómico.",
+        precio: "S/.217.00",
+        marca: "MODER",
+        presentacion: "Unidad",
+        imagen: "https://mayoristaprecioscuidados.com.ar/Admin/Imagenes/Items/395780.jpg"
+      },
+      2: {
+        nombre: "LAB-117-26003",
+        descripcion: "Cacerola de acero inoxidable N°28, ideal para preparaciones grandes, resistente y duradera.",
+        precio: "S/.120.00",
+        marca: "LAB",
+        presentacion: "Unidad",
+        imagen: "https://mayoristaprecioscuidados.com.ar/Admin/Imagenes/Items/4480.jpg"
+      },
+      3: {
+        nombre: "CL-6280",
+        descripcion: "Panquequera de 22cm con mango de madera, perfecta para panqueques y crepas.",
+        precio: "S/.150.00",
+        marca: "CL",
+        presentacion: "Unidad",
+        imagen: "https://mayoristaprecioscuidados.com.ar/Admin/Imagenes/Items/395630.jpg"
+      },
+      4: {
+        nombre: "CL-7582",
+        descripcion: "Sartén de mármol de 26cm, recubrimiento antiadherente premium, cocina uniforme.",
+        precio: "S/.230.00",
+        marca: "CL",
+        presentacion: "Unidad",
+        imagen: "https://m.media-amazon.com/images/I/81dnHMrSnXL.jpg"
+      }
+    };
+
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+    const producto = productos[id];
+
+    if (producto) {
+      document.getElementById("product-detail").innerHTML = `
+        <div class="col-md-4">
+          <img src="url-imagen" alt="${producto.nombre}" class="img-fluid rounded shadow" style="width: 500px; height: 350px; object-fit: cover;">
+        </div>
+        <div class="col-md-6">
+          <h3 class="fw-bold text-danger">${producto.nombre}</h3>
+          <p>${producto.descripcion}</p>
+          <ul>
+            <li><strong>Disponible para todas las Regiones.</strong></li>
+            <li><strong>Presentación:</strong> Unidad</li>
+            <li><strong>Precio:</strong> ${producto.precio}</li>
+          </ul>
+          <button class="btn btn-outline-danger w-100 backgroundHover-rojo mt-3">Agregar al Carrito</button>
+        </div>
+      `;
+    } else {
+      document.getElementById("product-detail").innerHTML = `<p class="text-center">Producto no encontrado.</p>`;
+    }
+  </script>
+  <script src="javaScript/funcionalidades.js"></script>
+  <script src="javaScript/producto-info.js"></script>
+  <script src="javaScript/cargarCategorias.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
 </html>
