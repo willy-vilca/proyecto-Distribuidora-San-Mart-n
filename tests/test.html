@@ -1,124 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>test</title>
-    <style>
-        
-.modal-mensaje {
-  display: none;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #notificaciones {
   position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.6);
-  backdrop-filter: blur(2px);
-  justify-content: center;
-  align-items: center;
-  z-index: 10000;
-  padding: 20px;
+  bottom: 20px;
+  left: 20px;
+  z-index: 1000;
 }
 
-
-.modal-contenidoMensaje {
-  background: #fff;
-  color: #333;
-  border-radius: 12px;
-  max-width: 500px;
-  width: 100%;
-  padding: 25px 20px;
-  position: relative;
-  animation: fadeInScale 0.3s ease;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+.notificacion {
+  background-color: #4CAF50; /* verde de éxito */
+  color: white;
+  padding: 12px 20px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+  opacity: 0;
+  transform: translateX(-100%);
+  transition: all 0.5s ease;
 }
 
-@keyframes fadeInScale {
-  from { opacity: 0; transform: scale(0.8); }
-  to { opacity: 1; transform: scale(1); }
+.notificacion.mostrar {
+  opacity: 1;
+  transform: translateX(0);
 }
 
-.modal-close {
-  position: absolute;
-  top: 12px; right: 15px;
-  background: transparent;
-  border: none;
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #666;
-  cursor: pointer;
-  transition: color 0.2s ease;
-}
-.modal-close:hover {
-  color: rgb(228, 30, 30);
-}
-
-
-.modal-contenidoMensaje h2 {
-  margin-top: 0;
-  color: rgb(228, 30, 30);
-  font-weight: bold;
-  font-size: 1.4rem;
-}
-
-.modal-contenidoMensaje p {
-  margin: 15px 0 0;
-  font-size: 1rem;
-  line-height: 1.5;
-}
-
-@media (max-width: 480px) {
-  .modal-contenidoMensaje {
-    max-width: 80%;
-    padding: 20px;
-  }
-  .modal-contenidoMensaje h2 {
-    font-size: 1.2rem;
-  }
-  .modal-contenidoMensaje p {
-    font-size: 0.9rem;
-  }
-}
-
-    </style>
+  </style>
 </head>
 <body>
-    <button onclick="mostrarModal('Inicio de sesión exitoso','Gracias por unirte a nosotros Armando, ahora puedes revisar nuestro catálogo y realizar pedidos sin problemas')">abrir modal</button>
-    <!-- Modal -->
-<div id="modalMensaje" class="modal-mensaje">
-  <div class="modal-contenidoMensaje">
-        <button class="modal-close">&times;</button>
-        <h2 id="modal-titulo"></h2>
-        <p id="modal-info"></p>
-  </div>
-</div>
+  <button onclick="agregarAlCarrito()">Agregar al carrito</button>
 
-<script>
-    function mostrarModal(titulo, mensaje) {
-    const modal = document.getElementById("modalMensaje");
-    const tituloModal = document.getElementById("modal-titulo");
-    const mensajeModal = document.getElementById("modal-info");
-    const closeBtn = modal.querySelector(".modal-close");
+<!-- Contenedor de notificaciones -->
+<div id="notificaciones"></div>
 
-    // Colocar contenido
-    tituloModal.textContent = titulo;
-    mensajeModal.textContent = mensaje;
-
-    // Mostrar modal
-    modal.style.display = "flex";
-
-    // Cerrar con botón X
-    closeBtn.onclick = () => {
-        modal.style.display = "none";
-    };
-
-    // Cerrar haciendo click fuera
-    modal.onclick = (e) => {
-        if (e.target === modal) {
-        modal.style.display = "none";
-        }
-    };
+  <script>
+    function agregarAlCarrito() {
+  // Aquí pondrías tu lógica para agregar el producto
+  mostrarNotificacion("✅ Producto agregado al carrito");
 }
 
-</script>
+function mostrarNotificacion(mensaje) {
+  const notificaciones = document.getElementById("notificaciones");
+
+  const notif = document.createElement("div");
+  notif.classList.add("notificacion");
+  notif.textContent = mensaje;
+
+  notificaciones.appendChild(notif);
+
+  // Mostrar con animación
+  setTimeout(() => {
+    notif.classList.add("mostrar");
+  }, 100);
+
+  // Ocultar después de 3 segundos
+  setTimeout(() => {
+    notif.classList.remove("mostrar");
+    // Eliminar del DOM después de la animación
+    setTimeout(() => {
+      notif.remove();
+    }, 500);
+  }, 3000);
+}
+
+  </script>
 </body>
 </html>

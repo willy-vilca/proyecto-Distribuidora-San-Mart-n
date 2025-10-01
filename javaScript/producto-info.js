@@ -54,22 +54,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // cargar detalle del producto
       detalleContainer.innerHTML = `
-        <div class="col-md-4">
-          <img src="${getImageUrl(producto.id)}" alt="${producto.nombre}" 
-               class="img-fluid rounded shadow" style="width: 500px; height: 350px; object-fit: cover;"
+        <div class="col-md-4 bg-white">
+          <img src="${getImageUrl(producto.nombre)}" alt="${producto.nombre}" 
+               class="img-fluid rounded shadow" style="width: 500px; height: 350px; object-fit: contain;"
                onerror="this.onerror=null; this.src='http://localhost:8080/images/default.jpg';">
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 mt-4 mt-md-0">
           <h3 class="fw-bold text-danger">${producto.nombre}</h3>
-          <p>${producto.descripcion}</p>
+          <p class="fs-4">${producto.descripcion}</p>
           <ul>
-            <li><strong>Disponible para todas las Regiones.</strong></li>
-            <li><strong>Presentación:</strong> Unidad</li>
-            <li><strong>Precio:</strong> S/.${parseFloat(producto.precio).toFixed(2)}</li>
+            <li class="fs-5"><strong>Código:</strong><span class="text-danger fw-bold"> ${producto.cod}</span></li>
+            <li class="fs-5"><strong>Presentación:</strong> Unidad</li>
+            <li class="fs-5"><strong>Precio:</strong> S/.${parseFloat(producto.precio).toFixed(2)}</li>
           </ul>
-          <button class="btn btn-outline-danger w-100 backgroundHover-rojo mt-3">Agregar al Carrito</button>
+          <button class="btn btn-outline-danger w-100 backgroundHover-rojo mt-3" id="botonAgregarCarrito" onclick="notificacionCarrito()">Agregar al Carrito</button>
         </div>
       `;
+
+      // evento para el botón "Agregar al carrito"
+      const btn = document.getElementById('botonAgregarCarrito');
+
+      btn.addEventListener("click", () => {
+        agregarAlCarrito(producto);
+      });
 
       //cargar productos relacionados
       CargarProductosRelacionados(producto.subcategoriaId, producto.id);
@@ -100,9 +107,9 @@ document.addEventListener("DOMContentLoaded", () => {
         col.className = "col-12 col-md-6 col-lg-3";
 
         col.innerHTML = `
-            <div class="product-card">
+            <div class="product-card shadow">
             <a href="producto-info.html?id=${p.id}">
-                <img src="${getImageUrl(p.id)}" alt="${p.nombre}"
+                <img src="${getImageUrl(p.nombre)}" alt="${p.nombre}"
                 onerror="this.onerror=null; this.src='http://localhost:8080/images/default.jpg';">
             </a>
             <h6 class="mt-2 fw-bold text-danger fs-5">${p.cod}</h6>
@@ -113,7 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <input type="number" class="form-control mx-1" value="1" min="1">
                 <button class="btn btn-outline-danger btn-sm backgroundHover-rojo" onclick="updateQty(this, 1)">+</button>
             </div>
-            <button class="btn btn-outline-danger w-100 backgroundHover-rojo btn-add-carrito">Agregar al Carrito</button>
+            <button class="btn btn-outline-danger w-100 backgroundHover-rojo btn-add-carrito" onclick="notificacionCarrito()">Agregar al Carrito</button>
             </div>
         `;
 

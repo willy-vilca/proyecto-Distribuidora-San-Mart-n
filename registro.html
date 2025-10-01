@@ -40,9 +40,9 @@
                 
                 <div class="col-md-5 mt-3 ms-0 ms-lg-0" style="display: flex; align-self: center; flex-direction: row;">
 
-                    <input type="text" placeholder="¿Qué estás buscando?"  style="width:100%;border: 1px solid #E21318; border-radius: 5px; border-bottom-right-radius: 0px; border-top-right-radius: 0px; height: 40px; padding: 10px">
+                    <input type="text" id="textoBuscado" placeholder="¿Qué estás buscando?"  style="width:100%;border: 1px solid #E21318; border-radius: 5px; border-bottom-right-radius: 0px; border-top-right-radius: 0px; height: 40px; padding: 10px">
                     <div class="text-center" style="background: #E21318; width: 40px; height: 40px; border-radius: 5px; border-bottom-left-radius: 0px; border-top-left-radius: 0px; cursor: pointer">
-                        <i class="bi bi-search" style="font-size: 18px; line-height: 40px; color: #fff"></i>
+                        <span id="botonBusqueda"><i class="bi bi-search" style="font-size: 18px; line-height: 40px; color: #fff"></i></span>
                     </div>
 
                 </div>
@@ -53,7 +53,7 @@
                         <!--Este botón abre el modal del carrito de compras-->
                         <button class="btn btn-outline-dark py-3 px-xxl-5" data-bs-toggle="modal" data-bs-target="#cartModal"  style="width:100%;" type="button">CARRITO <i class="bi bi-cart2" style="height: 16px; margin-left: 10px;"></i></button>
                     </div>
-                    <div class="text-center" style=" height: 50px;margin-right:5px">
+                    <div class="text-center" id="seccionUsuario" style=" height: 50px;margin-right:5px">
                         <a href="login.html"><button type="button" class="btn btn-outline-danger py-3 px-xxl-5 backgroundHover-rojo" style="width:100%;">INGRESAR</button></a>
                     </div>
                 </div>                

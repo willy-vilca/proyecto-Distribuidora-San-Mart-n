@@ -1,30 +1,13 @@
-//cargando nombre de la subcategoria seleccionada y de su categoria padre
+//cargando titulo segun lo que ingreso en el buscador
 document.addEventListener("DOMContentLoaded", () => {
-  const API_BASE = "http://localhost:8080/api";
-  const params = new URLSearchParams(window.location.search);
-  const subcategoriaId = params.get("subcategoriaId");
+    const params = new URLSearchParams(window.location.search);
+    const busqueda = params.get("busqueda");
 
-  const titulo = document.getElementById("tituloCategoria");
+    const titulo = document.getElementById("tituloCategoria");
 
-  if (!subcategoriaId || !titulo) return;
-
-  async function loadTitulo() {
-    try {
-      const res = await fetch(`${API_BASE}/subcategorias/${subcategoriaId}`);
-      if (!res.ok) throw new Error("Error obteniendo subcategoría");
-      const sub = await res.json();
-
-      // Construir título dinámico
-      titulo.innerHTML = `
-        <span class="fw-bold">${sub.nombreCategoriaPadre.toUpperCase()} //</span> ${sub.nombre.toUpperCase()}
-      `;
-    } catch (err) {
-      console.error(err);
-      titulo.textContent = "Categoría desconocida";
-    }
-  }
-
-  loadTitulo();
+    titulo.innerHTML = `
+        <span class="fw-bold">BÚSQUEDA //</span> ${busqueda.toUpperCase()}
+    `;
 });
 
 
@@ -59,6 +42,7 @@ function agregarAlCarrito(producto, cantidad = 1) {
 }
 
 
+
 //cargando productos desde la base de datos
 document.addEventListener("DOMContentLoaded", () => {
   const API_BASE = "http://localhost:8080/api";
@@ -71,10 +55,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Obtener id de la subcategoria desde la URL
   const params = new URLSearchParams(window.location.search);
-  const subcategoriaId = params.get("subcategoriaId");
+  const textoBusqueda = params.get("busqueda");
 
-  if (!subcategoriaId) {
-    container.innerHTML = "<p class='text-center text-danger'>No se especificó ninguna subcategoría.</p>";
+  if (!textoBusqueda) {
+    container.innerHTML = "<p class='text-center text-danger'>No se realizo ninguna busqueda.</p>";
     return;
   }
 
@@ -86,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Traer productos por subcategoría
   async function fetchProductos() {
     try {
-      const res = await fetch(`${API_BASE}/productos/subcategoria/${subcategoriaId}`);
+      const res = await fetch(`${API_BASE}/productos/search?busqueda=${textoBusqueda}`);
       if (!res.ok) throw new Error(`Error HTTP ${res.status}`);
       const productos = await res.json();
       renderProductos(productos);
@@ -101,9 +85,11 @@ document.addEventListener("DOMContentLoaded", () => {
     container.innerHTML = "";
 
     if (productos.length === 0) {
-      container.innerHTML = "<p class='text-center'>No hay productos disponibles en esta subcategoría.</p>";
+      container.innerHTML = "<p class='text-center'>No hay productos disponibles en esta busqueda.</p>";
       return;
     }
+
+    productos=productos.slice(0,20);//se limite los productos máximo a 20
 
     productos.forEach((p) => {
       const col = document.createElement("div");

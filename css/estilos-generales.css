@@ -338,3 +338,29 @@
   }
 }
 /*Fin ventana Emergente*/
+
+/*notificaciones*/
+#notificaciones {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 1000;
+}
+
+.notificacion {
+  background-color: #25D366; 
+  color: white;
+  font-weight: bold;
+  padding: 12px 20px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+  opacity: 0;
+  transform: translateX(-100%);
+  transition: all 0.5s ease;
+}
+
+.notificacion.mostrar {
+  opacity: 1;
+  transform: translateX(0);
+}
