@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <i class="bi bi-person-circle me-2"></i> ${primerNombre}
         </button>
         <ul class="dropdown-menu text-center" aria-labelledby="userMenu">
-          <li><a class="dropdown-item" href="#">Mis pedidos</a></li>
+          <li><a class="dropdown-item" href="misPedidos.html">Mis pedidos</a></li>
           <li><a class="dropdown-item text-danger" href="#" id="cerrarSesion">Cerrar sesión</a></li>
         </ul>
       </div>

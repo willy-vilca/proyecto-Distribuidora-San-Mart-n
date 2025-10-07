@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mis Pedidos - Distribuidora San Martín</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/estilos-generales.css">
+  <style>
+    /* Contenedor general */
+.pedido-card {
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  padding: 25px;
+  transition: all 0.2s ease-in-out;
+}
+
+.pedido-card:hover {
+  transform: scale(1.01);
+  background-color: #f2f2f2;
+}
+
+/* Encabezado del pedido */
+.pedido-header p {
+  font-size: 0.95rem;
+  color: #333;
+}
+
+/* Detalles ocultos por defecto */
+.pedido-detalles {
+  display: none;
+  overflow: hidden;
+  transition: max-height 0.4s ease, opacity 0.4s ease;
+  opacity: 0;
+}
+
+.pedido-detalles.mostrar {
+  display: block;
+  opacity: 1;
+}
+
+/* Productos del pedido */
+.detalle-item {
+  background: #fff;
+  border: 1px solid #eee;
+}
+
+.img-producto-pedido {
+  width: 90px;
+  height: 80px;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+.nombre-producto {
+  max-width: 45vw;
+  font-size: 1rem;
+  color: #333;
+}
+
+@media (max-width: 768px) {
+  .nombre-producto {
+    max-width: 55vw;
+    font-size: 0.95rem;
+  }
+
+  .pedido-header {
+    text-align: start;
+  }
+
+  .img-producto-pedido {
+    width: 70px;
+    height: 65px;
+  }
+}
+
+.btn-outline-danger {
+  border: 1px solid rgb(228, 30, 30);
+  color: rgb(228, 30, 30);
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-outline-danger:hover {
+  background-color: rgb(228, 30, 30);
+  color: white;
+  transform: scale(1.03) translateY(-3px);
+}
+
+  </style>
+</head>
+<body class="bg-light">
+
+  <!-- Contenido principal -->
+  <div class="container my-5" style="max-width: 1100px;">
+    <h1 class="fw-bold text-center mb-5 text-danger">MIS PEDIDOS</h1>
+
+    <!-- Pedido 1 -->
+    <div class="pedido-card shadow-sm mb-4">
+      <div class="pedido-header d-flex flex-column flex-md-row justify-content-between align-items-md-center">
+        <div>
+          <h5 class="fw-bold mb-2 text-danger">Pedido #00123</h5>
+          <p class="mb-1"><strong>Cliente:</strong> Juan Pérez</p>
+          <p class="mb-1"><strong>DNI:</strong> 87654321</p>
+          <p class="mb-1"><strong>Correo:</strong> juanperez@gmail.com</p>
+        </div>
+        <div class="text-md-end mt-3 mt-md-0">
+          <p class="mb-1"><strong>Fecha:</strong> 05/10/2025</p>
+          <p class="mb-1"><strong>Total:</strong> S/. 450.00</p>
+          <button class="btn btn-outline-danger mt-2 toggle-detalles">
+            <i class="bi bi-eye"></i> Ver detalles
+          </button>
+        </div>
+      </div>
+
+      <div class="pedido-detalles mt-3">
+        <div class="detalle-item shadow-sm p-3 mb-3 rounded d-flex flex-wrap justify-content-between align-items-center">
+          <div class="d-flex align-items-center">
+            <img src="img/index/carrusel-img1.png" alt="Producto 1" class="img-producto-pedido me-3" >
+            <span class="fw-medium text-truncate nombre-producto">Aceite Vegetal 1L</span>
+          </div>
+          <div class="text-start text-sm-end mt-3 mt-sm-0">
+            <p class="mb-1">Cantidad: 3</p>
+            <p class="mb-0 text-danger fw-bold">Subtotal: S/. 90.00</p>
+          </div>
+        </div>
+
+        <div class="detalle-item shadow-sm p-3 mb-3 rounded d-flex flex-wrap justify-content-between align-items-center">
+          <div class="d-flex align-items-center">
+            <img src="img/index/carrusel-img2.png" alt="Producto 2" class="img-producto-pedido me-3" >
+            <span class="fw-medium text-truncate nombre-producto">Arroz Superior 5kg</span>
+          </div>
+          <div class="text-start text-sm-end mt-3 mt-sm-0">
+            <p class="mb-1">Cantidad: 2</p>
+            <p class="mb-0 text-danger fw-bold">Subtotal: S/. 80.00</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pedido 2 -->
+    <div class="pedido-card shadow-sm mb-4">
+      <div class="pedido-header d-flex flex-column flex-md-row justify-content-between align-items-md-center">
+        <div>
+          <h5 class="fw-bold mb-2 text-danger">Pedido #00124</h5>
+          <p class="mb-1"><strong>Cliente:</strong> María López</p>
+          <p class="mb-1"><strong>DNI:</strong> 45678912</p>
+          <p class="mb-1"><strong>Correo:</strong> marialopez@gmail.com</p>
+        </div>
+        <div class="text-md-end mt-3 mt-md-0">
+          <p class="mb-1"><strong>Fecha:</strong> 04/10/2025</p>
+          <p class="mb-1"><strong>Total:</strong> S/. 230.00</p>
+          <button class="btn btn-outline-danger mt-2 toggle-detalles">
+            <i class="bi bi-eye"></i> Ver detalles
+          </button>
+        </div>
+      </div>
+
+      <div class="pedido-detalles mt-3">
+        <div class="detalle-item shadow-sm p-3 mb-3 rounded d-flex flex-wrap justify-content-between align-items-center">
+          <div class="d-flex align-items-center">
+            <img src="img/producto3.jpg" alt="Producto 3" class="img-producto-pedido me-3" >
+            <span class="fw-medium text-truncate nombre-producto">Azúcar Blanca 1kg</span>
+          </div>
+          <div class="text-start text-sm-end mt-3 mt-sm-0">
+            <p class="mb-1">Cantidad: 5</p>
+            <p class="mb-0 text-danger fw-bold">Subtotal: S/. 50.00</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Mostrar / ocultar detalles
+    document.querySelectorAll('.toggle-detalles').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const detalles = btn.closest('.pedido-card').querySelector('.pedido-detalles');
+        detalles.classList.toggle('mostrar');
+        btn.innerHTML = detalles.classList.contains('mostrar')
+          ? '<i class="bi bi-eye-slash"></i> Ocultar detalles'
+          : '<i class="bi bi-eye"></i> Ver detalles';
+      });
+    });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
