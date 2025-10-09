@@ -54,9 +54,11 @@ let totalPedidoCompra = 0;
 
         itemPedido.innerHTML = `
             <div class="d-flex align-items-center">
-                <img src="${getImageUrl(producto.nombre)}" alt="${producto.nombre}" class="product-img-pedidoFinal me-2 ms-3" 
-                onerror="this.onerror=null; this.src='https://backend-distribuidora-production.up.railway.app/images/default.jpg';">
-                <span class="text-truncate product-name ms-4">${producto.nombre}</span>
+                <a href="producto-info.html?id=${producto.id}">
+                  <img src="${getImageUrl(producto.nombre)}" alt="${producto.nombre}" class="product-img-pedidoFinal me-2 ms-3" 
+                  onerror="this.onerror=null; this.src='https://backend-distribuidora-production.up.railway.app/images/default.jpg';">
+                </a>
+                <span class="text-truncate product-name ms-4"><a href="producto-info.html?id=${producto.id}" class="text-dark text-truncate product-name">${producto.nombre}</a></span>
             </div>
             <div class="d-flex align-items-center product-actions me-4">
                 <div class="input-group input-group-sm me-1">

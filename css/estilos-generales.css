@@ -48,11 +48,15 @@
       font-size: 1.1rem;
       font-weight: 500;
       max-width: 17vw;
+      text-decoration: none;
+    }
+    .product-name:hover{
+      text-decoration: underline;
     }
     .text-truncate {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      white-space: nowrap !important;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
     }
 
     /* Acciones producto */

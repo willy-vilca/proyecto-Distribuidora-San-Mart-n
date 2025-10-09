@@ -81,9 +81,11 @@ function renderCarrito() {
 
     item.innerHTML = `
       <div class="d-flex align-items-center">
-        <img src="${getImageUrl(producto.nombre)}" alt="${producto.nombre}" class="product-img me-2" 
-        onerror="this.onerror=null; this.src='https://backend-distribuidora-production.up.railway.app/images/default.jpg';">
-        <span class="text-truncate product-name">${producto.nombre}</span>
+        <a href="producto-info.html?id=${producto.id}">
+          <img src="${getImageUrl(producto.nombre)}" alt="${producto.nombre}" class="product-img me-2" 
+          onerror="this.onerror=null; this.src='https://backend-distribuidora-production.up.railway.app/images/default.jpg';">
+        </a>
+        <span class="text-truncate product-name"><a href="producto-info.html?id=${producto.id}" class="text-dark text-truncate product-name">${producto.nombre}</a></span>
       </div>
       <div class="d-flex align-items-center product-actions">
         <div class="input-group input-group-sm me-1">
