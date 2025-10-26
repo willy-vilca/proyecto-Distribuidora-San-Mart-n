@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <i class="bi bi-person-circle me-2"></i> ${primerNombre}
         </button>
         <ul class="dropdown-menu text-center" aria-labelledby="userMenu">
+          <li><a class="dropdown-item " href="#" data-bs-toggle="modal" data-bs-target="#modalDatosUsuario">Datos Personales</a></li>
           <li><a class="dropdown-item " href="cambiarcontraseña.html">Cambiar contraseña</a></li>
           <li><a class="dropdown-item fw-semibold" href="misPedidos.html">Mis pedidos</a></li>
           <li><a class="dropdown-item fw-bold" style="color:rgb(228, 30, 30);" href="#" id="cerrarSesion">Cerrar sesión</a></li>
@@ -238,4 +239,130 @@ function mostrarNotificacion(mensaje) {
 
 function notificacionCarrito(){
   mostrarNotificacion(`<i class='bi bi-check-circle'></i> Producto agregado al carrito`)
+}
+
+//funcionalidad del modal para mostrar datos del usuario
+document.addEventListener("DOMContentLoaded", () => {
+
+    const API_URL = "https://backend-proyecto-distribuidora-production.up.railway.app/api/auth";
+
+    const nombreInput = document.getElementById("nombreUsuario");
+    const correoInput = document.getElementById("correoUsuario");
+    const telefonoInput = document.getElementById("telefonoUsuario");
+    const dniInput = document.getElementById("dniUsuario");
+    const btnCambiar = document.getElementById("btnCambiarDatos");
+    const btnConfirmar = document.getElementById("btnConfirmarCambios");
+    const cuerpoModal = document.getElementById("cuerpoModalDatosUsuario");
+
+    const usuario = JSON.parse(localStorage.getItem("usuario")) || [];
+
+    function cargarDatos() {
+        nombreInput.value = usuario.nombre;
+        correoInput.value = usuario.correo;
+        telefonoInput.value = usuario.telefono;
+        dniInput.value = usuario.dni;
+    }
+
+    cargarDatos();
+
+    btnCambiar.addEventListener("click", () => {
+        btnCambiar.disabled = true;
+        btnConfirmar.classList.remove("d-none");
+
+        [nombreInput, correoInput, telefonoInput, dniInput].forEach(input => {
+        input.removeAttribute("readonly");
+        input.classList.add("editable");
+        });
+    });
+
+    btnConfirmar.addEventListener("click",() => {
+        guardarCambios();
+    });
+
+    async function guardarCambios() {
+        const updatedData = {
+        idUsuario: usuario.userId,
+        nombre: nombreInput.value.trim(),
+        correo: correoInput.value.trim(),
+        telefono: telefonoInput.value.trim(),
+        dni: dniInput.value.trim()
+        };
+
+        try {
+        const res = await fetch(`${API_URL}/actualizar`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(updatedData)
+        });
+
+        const text = await res.text(); 
+        const respuesta = JSON.parse(text);
+
+        if (res.ok) {
+            mostrarModalMensaje(respuesta.mensaje,"success");
+
+            updatedData.userId=updatedData.idUsuario;
+            delete updatedData.idUsuario;
+            localStorage.setItem("usuario", JSON.stringify(updatedData));
+
+            // Bloquear nuevamente los inputs
+            [nombreInput, correoInput, telefonoInput, dniInput].forEach(input => input.setAttribute("readonly", true));
+            btnCambiar.disabled = false;
+            btnConfirmar.classList.add("d-none");
+
+        } else {
+            mostrarModalMensaje(respuesta.mensaje,"error");
+        }
+
+        } catch (err) {
+        console.error("Error al actualizar usuario:", err);
+        alert("Ocurrió un error al actualizar los datos.");
+        }
+    }
+
+});
+
+
+// Función para mostrar un modal de mensaje
+function mostrarModalMensaje(mensaje, tipo = "info") {
+
+  const modal = document.createElement("div");
+  modal.id = "modalMensajePequeño";
+  modal.className = "modal fade";
+  modal.tabIndex = -1;
+  modal.innerHTML = `
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+      <div class="modal-content text-center">
+        <div class="modal-header ${
+          tipo === "success"
+            ? "bg-success text-white"
+            : tipo === "error"
+            ? "bg-danger text-white"
+            : "bg-secondary text-white"
+        } p-2">
+          <h6 class="modal-title m-0">${
+            tipo === "success"
+              ? "Éxito"
+              : tipo === "error"
+              ? "Error"
+              : "Aviso"
+          }</h6>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body py-3">
+          <p class="mb-0">${mensaje}</p>
+        </div>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+
+  const modalBootstrap = new bootstrap.Modal(modal);
+  modalBootstrap.show();
+
+  setTimeout(() => {
+    modalBootstrap.hide();
+    setTimeout(() => modal.remove(), 500);
+  }, 3000);
 }

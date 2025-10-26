@@ -277,6 +277,50 @@
         </a>
     </div>
 
+    <!-- Modal Datos Personales -->
+        <div class="modal fade" id="modalDatosUsuario" tabindex="-1" aria-labelledby="modalDatosUsuarioLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content shadow-lg border-0">
+
+                <div class="modal-header py-3" style="background-color: rgb(228, 30, 30); color: white;">
+                    <h5 class="modal-title fw-bold w-100 text-center" id="modalDatosUsuarioLabel">
+                    Datos personales de la cuenta
+                    </h5>
+                </div>
+
+                <div class="modal-body px-4 py-3" id="cuerpoModalDatosUsuario">
+                    <form id="formDatosUsuario" class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Nombre</label>
+                        <input type="text" id="nombreUsuario" class="form-control input-datos" readonly>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Correo</label>
+                        <input type="email" id="correoUsuario" class="form-control input-datos" readonly>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Teléfono</label>
+                        <input type="text" id="telefonoUsuario" class="form-control input-datos" readonly>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">DNI</label>
+                        <input type="text" id="dniUsuario" class="form-control input-datos" readonly>
+                    </div>
+                    </form>
+                </div>
+
+                <div class="modal-footer d-flex justify-content-between">
+                    <button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">Cerrar</button>
+                    <div>
+                    <button id="btnCambiarDatos" class="btn btn-danger px-4">Cambiar datos</button>
+                    <button id="btnConfirmarCambios" class="btn btn-success px-4 d-none">Confirmar cambios</button>
+                    </div>
+                </div>
+
+                </div>
+            </div>
+        </div>
+
 
     <script src="javaScript/funcionalidades.js"></script>
     <script src="javaScript/misPedidos.js"></script>

@@ -107,6 +107,12 @@ let totalPedidoCompra = 0;
 const formPedido = document.getElementById('formPedido');
 formPedido.addEventListener('submit', function(event) {
   event.preventDefault();
+  //validamos que la compra sea mayor a S/300
+  if(totalPedidoCompra<300){
+    mostrarModal('¡Monto Mínimo no Alcanzado!','El monto mínimo de compra en línea es de S/.300, agregue más productos por favor.');
+    return;
+  }
+
   //validamos campos de DNI y telefono
   const ValorcampoTelefono = document.getElementById('telefonoUserPedido').value;
   const valorCampoDni = document.getElementById('dniUserPedido').value;
