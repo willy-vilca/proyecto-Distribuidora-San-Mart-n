@@ -296,6 +296,20 @@ document.addEventListener("DOMContentLoaded", () => {
         dni: dniInput.value.trim()
         };
 
+        //patron para verificar si el campo telefono tiene 9 números
+        const regex = /^[0-9]{9}$/;
+        if(!regex.test(telefonoInput.value.trim())){
+            mostrarModalMensaje("El teléfono nuevo debe tener 9 números.","error");
+            return;
+        }
+
+        //patron para verificar si el campo dni tiene 8 números
+        const regexDni = /^[0-9]{8}$/;
+        if(!regexDni.test(dniInput.value.trim())){
+            mostrarModalMensaje("El dni ingresado debe tener 8 números.","error");
+            return;
+        }
+
         try {
         const res = await fetch(`${API_URL}/actualizar`, {
             method: "PUT",
